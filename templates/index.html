@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeGen - Créateur de Mèmes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Meme<span>Gen</span></h1>
+            <p>Créez, riez, partagez.</p>
+        </header>
+
+        <main class="editor-area">
+            <div class="controls">
+                <div class="upload-section">
+                    <label for="imageInput" class="custom-file-upload">
+                        📁 Choisir une image
+                    </label>
+                    <input type="file" id="imageInput" accept="image/*">
+                </div>
+
+                <div class="text-inputs">
+                    <input type="text" id="topText" placeholder="Texte du haut">
+                    <input type="text" id="bottomText" placeholder="Texte du bas">
+                </div>
+
+                <div class="actions">
+                    <button id="downloadBtn" class="btn btn-primary">⬇️ Télécharger</button>
+                    <button id="saveBtn" class="btn btn-secondary">💾 Sauvegarder dans la galerie</button>
+                </div>
+            </div>
+
+            <div class="preview">
+                <canvas id="memeCanvas"></canvas>
+                <p class="instruction">L'aperçu se mettra à jour automatiquement</p>
+            </div>
+        </main>
+
+        <section class="gallery">
+            <h2>Galerie Communautaire</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                {% for img in images %}
+                    <div class="gallery-item">
+                        <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="Meme">
+                        <a href="{{ url_for('static', filename='uploads/' + img) }}" download>Télécharger</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <div id="customModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="modalIcon">✅</span>
+            <h3 id="modalTitle">Succès</h3>
+        </div>
+        <p id="modalMessage">Votre mème a été enregistré !</p>
+        <button id="modalCloseBtn" class="btn btn-primary">D'accord</button>
+    </div>
+</div>
+</body>
+</html>
