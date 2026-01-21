@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
+# Dossier où seront stockés les mèmes
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -20,6 +21,8 @@ def index():
 def save_meme():
     data = request.get_json()
     image_data = data['image']
+    
+    # Nettoyage et conversion base64 -> binaire
     header, encoded = image_data.split(",", 1)
     binary_data = base64.b64decode(encoded)
     

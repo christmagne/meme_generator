@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MemeGen Pro</title>
+    <title>MemeGen Ultimate</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Oswald:wght@700&family=Pacifico&family=Bangers&display=swap" rel="stylesheet">
 </head>
@@ -12,39 +12,60 @@
     <div class="container">
         <header>
             <h1>Meme<span>Gen</span></h1>
-            <p>Personnalisez vos mèmes à l'infini.</p>
+            <p>L'éditeur pro pour vos idées.</p>
         </header>
 
         <main class="editor-area">
             <div class="controls">
+                
                 <div class="upload-section">
-                    <label for="imageInput" class="custom-file-upload">📁 Choisir une image</label>
+                    <label for="imageInput" class="custom-file-upload">📁 Choisir une image de base</label>
                     <input type="file" id="imageInput" accept="image/*">
                 </div>
 
-                <div class="text-inputs">
-                    <input type="text" id="topText" placeholder="Texte du haut">
-                    <input type="text" id="bottomText" placeholder="Texte du bas">
+                <div class="text-group">
+                    <label class="group-label">Texte du Haut</label>
+                    <input type="text" id="topText" placeholder="Taper le texte ici...">
+                    
+                    <div class="mini-toolbar">
+                        <div class="tool" title="Couleur">
+                            <input type="color" id="topColor" value="#ffffff">
+                        </div>
+                        <div class="tool wide" title="Taille">
+                            <input type="range" id="topSize" min="10" max="100" value="50">
+                        </div>
+                        <div class="tool wide" title="Police">
+                            <select id="topFont">
+                                <option value="Impact">Impact</option>
+                                <option value="Oswald">Oswald</option>
+                                <option value="Pacifico">Pacifico</option>
+                                <option value="Bangers">Bangers</option>
+                                <option value="Arial">Arial</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="style-toolbar">
-                    <div class="style-group">
-                        <label>Couleur</label>
-                        <input type="color" id="textColor" value="#ffffff">
-                    </div>
-                    <div class="style-group">
-                        <label>Taille</label>
-                        <input type="range" id="textSize" min="10" max="100" value="50">
-                    </div>
-                    <div class="style-group">
-                        <label>Police</label>
-                        <select id="textFont">
-                            <option value="Impact">Impact (Classic)</option>
-                            <option value="Oswald">Oswald</option>
-                            <option value="Pacifico">Pacifico (Script)</option>
-                            <option value="Bangers">Bangers (Comic)</option>
-                            <option value="Arial">Arial</option>
-                        </select>
+                <div class="text-group">
+                    <label class="group-label">Texte du Bas</label>
+                    <input type="text" id="bottomText" placeholder="Taper le texte ici...">
+                    
+                    <div class="mini-toolbar">
+                        <div class="tool" title="Couleur">
+                            <input type="color" id="bottomColor" value="#ffffff">
+                        </div>
+                        <div class="tool wide" title="Taille">
+                            <input type="range" id="bottomSize" min="10" max="100" value="50">
+                        </div>
+                        <div class="tool wide" title="Police">
+                            <select id="bottomFont">
+                                <option value="Impact">Impact</option>
+                                <option value="Oswald">Oswald</option>
+                                <option value="Pacifico">Pacifico</option>
+                                <option value="Bangers">Bangers</option>
+                                <option value="Arial">Arial</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 

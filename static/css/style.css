@@ -4,6 +4,7 @@
     --dark: #2d3436;
     --light: #dfe6e9;
     --white: #ffffff;
+    --bg-group: #f1f2f6;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -12,6 +13,7 @@ body {
     background-color: #f0f2f5;
     margin: 0;
     padding: 0;
+    color: var(--dark);
 }
 
 .container {
@@ -35,6 +37,7 @@ header p {
     color: #636e72;
 }
 
+/* LAYOUT PRINCIPAL */
 .editor-area {
     display: grid;
     grid-template-columns: 350px 1fr;
@@ -49,49 +52,10 @@ header p {
 .controls {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
-.text-inputs input,
-select {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid var(--light);
-    border-radius: 10px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-/* Barre d'outils Style */
-.style-toolbar {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.style-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.style-group input[type="color"] {
-    border: none;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    background: none;
-}
-
-.style-group input[type="range"] {
-    width: 60%;
-}
-
+/* UPLOAD */
 .custom-file-upload {
     border: 2px dashed var(--primary);
     display: block;
@@ -101,8 +65,84 @@ select {
     border-radius: 10px;
     font-weight: 600;
     color: var(--primary);
+    transition: 0.3s;
 }
 
+.custom-file-upload:hover {
+    background: #eaeaeb;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* NOUVEAUX GROUPES DE TEXTE */
+.text-group {
+    background-color: var(--bg-group);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e1e1e1;
+}
+
+.group-label {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #636e72;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.text-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* MINI TOOLBAR (Pour les réglages) */
+.mini-toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.tool {
+    display: flex;
+    align-items: center;
+}
+
+.tool.wide {
+    flex: 1;
+}
+
+.mini-toolbar input[type="color"] {
+    border: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+}
+
+.mini-toolbar input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+.mini-toolbar select {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* BOUTONS */
 .actions {
     display: flex;
     gap: 10px;
@@ -129,13 +169,19 @@ select {
     color: white;
 }
 
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* APERÇU CANVAS */
 .preview {
     background: #2d3436;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 450px;
+    min-height: 500px;
     padding: 20px;
 }
 
@@ -146,7 +192,7 @@ canvas {
     border: 2px solid white;
 }
 
-/* Galerie et boutons action */
+/* GALERIE */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -160,6 +206,11 @@ canvas {
     padding: 10px;
     border-radius: 15px;
     box-shadow: var(--shadow);
+    transition: transform 0.2s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
 }
 
 .gallery-item img {
@@ -194,7 +245,7 @@ canvas {
     background: var(--danger);
 }
 
-/* MODALE CORRIGÉE (PLEIN CENTRE) */
+/* MODALE */
 .modal {
     display: none;
     position: fixed;
@@ -216,7 +267,6 @@ canvas {
     width: 90%;
     max-width: 350px;
     text-align: center;
-    position: relative;
     animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -230,6 +280,16 @@ canvas {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+#modalIcon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+#modalMessage {
+    color: #666;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 850px) {
