@@ -17,7 +17,6 @@
 
         <main class="editor-area">
             <div class="controls">
-                
                 <div class="upload-section">
                     <label for="imageInput" class="custom-file-upload">📁 Choisir une image de base</label>
                     <input type="file" id="imageInput" accept="image/*">
@@ -26,14 +25,9 @@
                 <div class="text-group">
                     <label class="group-label">Texte du Haut</label>
                     <input type="text" id="topText" placeholder="Taper le texte ici...">
-                    
                     <div class="mini-toolbar">
-                        <div class="tool" title="Couleur">
-                            <input type="color" id="topColor" value="#ffffff">
-                        </div>
-                        <div class="tool wide" title="Taille">
-                            <input type="range" id="topSize" min="10" max="100" value="50">
-                        </div>
+                        <div class="tool" title="Couleur"><input type="color" id="topColor" value="#ffffff"></div>
+                        <div class="tool wide" title="Taille"><input type="range" id="topSize" min="10" max="100" value="50"></div>
                         <div class="tool wide" title="Police">
                             <select id="topFont">
                                 <option value="Impact">Impact</option>
@@ -49,14 +43,9 @@
                 <div class="text-group">
                     <label class="group-label">Texte du Bas</label>
                     <input type="text" id="bottomText" placeholder="Taper le texte ici...">
-                    
                     <div class="mini-toolbar">
-                        <div class="tool" title="Couleur">
-                            <input type="color" id="bottomColor" value="#ffffff">
-                        </div>
-                        <div class="tool wide" title="Taille">
-                            <input type="range" id="bottomSize" min="10" max="100" value="50">
-                        </div>
+                        <div class="tool" title="Couleur"><input type="color" id="bottomColor" value="#ffffff"></div>
+                        <div class="tool wide" title="Taille"><input type="range" id="bottomSize" min="10" max="100" value="50"></div>
                         <div class="tool wide" title="Police">
                             <select id="bottomFont">
                                 <option value="Impact">Impact</option>
@@ -72,6 +61,7 @@
                 <div class="actions">
                     <button id="downloadBtn" class="btn btn-primary">⬇️ Télécharger</button>
                     <button id="saveBtn" class="btn btn-secondary">💾 Sauvegarder</button>
+                    <button id="shareBtn" class="btn btn-success">🔗 Partager</button>
                 </div>
             </div>
 

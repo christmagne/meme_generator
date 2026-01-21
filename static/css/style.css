@@ -1,6 +1,8 @@
 :root {
     --primary: #6c5ce7;
     --danger: #ff7675;
+    --success: #00b894;
+    /* Couleur pour le bouton Partager */
     --dark: #2d3436;
     --light: #dfe6e9;
     --white: #ffffff;
@@ -37,7 +39,6 @@ header p {
     color: #636e72;
 }
 
-/* LAYOUT PRINCIPAL */
 .editor-area {
     display: grid;
     grid-template-columns: 350px 1fr;
@@ -55,7 +56,6 @@ header p {
     gap: 20px;
 }
 
-/* UPLOAD */
 .custom-file-upload {
     border: 2px dashed var(--primary);
     display: block;
@@ -76,7 +76,6 @@ input[type="file"] {
     display: none;
 }
 
-/* NOUVEAUX GROUPES DE TEXTE */
 .text-group {
     background-color: var(--bg-group);
     padding: 15px;
@@ -103,7 +102,6 @@ input[type="file"] {
     margin-bottom: 10px;
 }
 
-/* MINI TOOLBAR (Pour les réglages) */
 .mini-toolbar {
     display: flex;
     gap: 10px;
@@ -142,21 +140,25 @@ input[type="file"] {
     cursor: pointer;
 }
 
-/* BOUTONS */
+/* BOUTONS ACTIONS (Modifiés pour 3 boutons) */
 .actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .btn {
     flex: 1;
-    padding: 15px;
+    min-width: 100px;
+    padding: 15px 10px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.3s;
+    font-size: 13px;
+    white-space: nowrap;
 }
 
 .btn-primary {
@@ -166,6 +168,11 @@ input[type="file"] {
 
 .btn-secondary {
     background: var(--dark);
+    color: white;
+}
+
+.btn-success {
+    background: var(--success);
     color: white;
 }
 
@@ -179,7 +186,6 @@ input[type="file"] {
     transform: translateY(-2px);
 }
 
-/* APERÇU CANVAS */
 .preview {
     background: #2d3436;
     border-radius: 15px;
@@ -197,7 +203,6 @@ canvas {
     border: 2px solid white;
 }
 
-/* GALERIE */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -250,7 +255,6 @@ canvas {
     background: var(--danger);
 }
 
-/* MODALES (Style centré parfait) */
 .modal {
     display: none;
     position: fixed;

@@ -2,17 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('memeCanvas');
     const ctx = canvas.getContext('2d');
     
-    // --- VARIABLES ---
     const imageInput = document.getElementById('imageInput');
     let currentImage = null;
 
-    // --- VARIABLES TEXTE HAUT ---
+    // --- VARIABLES TEXTE ---
     const topText = document.getElementById('topText');
     const topColor = document.getElementById('topColor');
     const topSize = document.getElementById('topSize');
     const topFont = document.getElementById('topFont');
 
-    // --- VARIABLES TEXTE BAS ---
     const bottomText = document.getElementById('bottomText');
     const bottomColor = document.getElementById('bottomColor');
     const bottomSize = document.getElementById('bottomSize');
@@ -20,10 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const allInputs = [topText, topColor, topSize, topFont, bottomText, bottomColor, bottomSize, bottomFont];
 
-    // --- MOTEUR DE DESSIN ---
     function drawMeme() {
         if (!currentImage) return;
-
         canvas.width = currentImage.width;
         canvas.height = currentImage.height;
         ctx.drawImage(currentImage, 0, 0);
@@ -54,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- ECOUTEURS ---
     imageInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -82,11 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bouton Sauvegarder
     document.getElementById('saveBtn').onclick = () => {
         if (!currentImage) return showModal('Erreur', 'Rien à sauvegarder !', '❌');
-        
         const btn = document.getElementById('saveBtn');
         const oldText = btn.innerText;
         btn.innerText = "Envoi...";
-
         fetch('/save_meme', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -96,23 +89,42 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             btn.innerText = oldText;
             if (data.status === 'success') showModal('Succès', 'Enregistré dans la galerie !');
-        })
-        .catch(err => {
-            btn.innerText = oldText;
-            console.error(err);
         });
+    };
+
+    // --- LOGIQUE PARTAGER (WEB SHARE API) ---
+    document.getElementById('shareBtn').onclick = async () => {
+        if (!currentImage) return showModal('Oups', 'Rien à partager !', '🖼️');
+
+        try {
+            const dataUrl = canvas.toDataURL('image/png');
+            const blob = await (await fetch(dataUrl)).blob();
+            const file = new File([blob], 'meme.png', { type: 'image/png' });
+
+            // Vérifie si le navigateur supporte le partage de fichiers
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: 'Mon Mème',
+                    text: 'Regardez le mème que je viens de créer avec MemeGen !'
+                });
+            } else {
+                showModal('Info', 'Le partage direct n\'est pas supporté par votre navigateur. Téléchargez l\'image pour la partager.', 'ℹ️');
+            }
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                showModal('Erreur', 'Impossible d\'ouvrir le menu de partage.', '⚠️');
+            }
+        }
     };
 });
 
-// --- GESTIONNAIRES DE MODALES ---
-
-// 1. Modale d'Information (Remplacement de alert)
+// MODALES
 function showModal(title, message, icon = '✅') {
     const modal = document.getElementById('infoModal');
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalMessage').innerText = message;
     document.getElementById('modalIcon').innerText = icon;
-    
     modal.style.display = 'flex';
     document.getElementById('modalCloseBtn').onclick = () => {
         modal.style.display = 'none';
@@ -120,23 +132,14 @@ function showModal(title, message, icon = '✅') {
     };
 }
 
-// 2. Modale de Confirmation (Remplacement de confirm)
-let imageToDelete = null; // Variable temporaire pour stocker quel fichier supprimer
-
+let imageToDelete = null;
 function requestDelete(filename) {
-    imageToDelete = filename; // On garde le nom en mémoire
+    imageToDelete = filename;
     document.getElementById('confirmModal').style.display = 'flex';
 }
-
-// Configuration des boutons de la modale Confirm
-document.getElementById('cancelDeleteBtn').onclick = () => {
-    document.getElementById('confirmModal').style.display = 'none';
-    imageToDelete = null;
-};
-
+document.getElementById('cancelDeleteBtn').onclick = () => document.getElementById('confirmModal').style.display = 'none';
 document.getElementById('confirmDeleteBtn').onclick = () => {
     if (imageToDelete) {
-        // Exécution réelle de la suppression
         fetch(`/delete_meme/${imageToDelete}`, { method: 'DELETE' })
         .then(res => res.json())
         .then(data => {
@@ -145,10 +148,7 @@ document.getElementById('confirmDeleteBtn').onclick = () => {
                 const element = document.getElementById(`item-${imageToDelete}`);
                 element.style.transform = "scale(0)";
                 setTimeout(() => element.remove(), 300);
-            } else {
-                showModal('Erreur', 'Impossible de supprimer', '⚠️');
             }
-            imageToDelete = null;
         });
     }
 };
