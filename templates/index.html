@@ -88,7 +88,7 @@
                         <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="Meme">
                         <div class="item-actions">
                             <a href="{{ url_for('static', filename='uploads/' + img) }}" download class="small-btn download">⬇️</a>
-                            <button onclick="deleteMeme('{{ img }}')" class="small-btn delete">🗑️</button>
+                            <button onclick="requestDelete('{{ img }}')" class="small-btn delete">🗑️</button>
                         </div>
                     </div>
                 {% endfor %}
@@ -96,12 +96,24 @@
         </section>
     </div>
 
-    <div id="customModal" class="modal">
+    <div id="infoModal" class="modal">
         <div class="modal-content">
             <div id="modalIcon">✅</div>
             <h3 id="modalTitle">Succès</h3>
             <p id="modalMessage">Message ici</p>
             <button id="modalCloseBtn" class="btn btn-primary">D'accord</button>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div id="confirmIcon">🗑️</div>
+            <h3>Confirmation</h3>
+            <p>Voulez-vous vraiment supprimer ce mème définitivement ?</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteBtn" class="btn btn-secondary">Annuler</button>
+                <button id="confirmDeleteBtn" class="btn btn-danger">Supprimer</button>
+            </div>
         </div>
     </div>
 

@@ -169,6 +169,11 @@ input[type="file"] {
     color: white;
 }
 
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
 .btn:hover {
     opacity: 0.9;
     transform: translateY(-2px);
@@ -245,7 +250,7 @@ canvas {
     background: var(--danger);
 }
 
-/* MODALE */
+/* MODALES (Style centré parfait) */
 .modal {
     display: none;
     position: fixed;
@@ -282,7 +287,8 @@ canvas {
     }
 }
 
-#modalIcon {
+#modalIcon,
+#confirmIcon {
     font-size: 3rem;
     margin-bottom: 10px;
 }
@@ -290,6 +296,12 @@ canvas {
 #modalMessage {
     color: #666;
     margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 @media (max-width: 850px) {

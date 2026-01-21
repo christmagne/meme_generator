@@ -13,7 +13,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 @app.route('/')
 def index():
     images = sorted(os.listdir(UPLOAD_FOLDER), reverse=True)
-    # On ignore le fichier .gitkeep s'il existe
+    # On ignore le fichier .gitkeep 
     images = [img for img in images if img != '.gitkeep']
     return render_template('index.html', images=images)
 
@@ -22,7 +22,7 @@ def save_meme():
     data = request.get_json()
     image_data = data['image']
     
-    # Nettoyage et conversion base64 -> binaire
+    # Nettoyage et conversion 
     header, encoded = image_data.split(",", 1)
     binary_data = base64.b64decode(encoded)
     
